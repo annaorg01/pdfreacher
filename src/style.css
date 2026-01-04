@@ -60,6 +60,24 @@ body {
     100% { transform: translate(0); }
 }
 
+/* Atomic Symbol Animation */
+.atomic-symbol {
+    display: inline-block;
+    animation: atomic-pulse 2s infinite;
+    filter: drop-shadow(0 0 3px #0f0);
+}
+
+@keyframes atomic-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
 /* Additional Vite-specific enhancements */
 #terminal {
     scrollbar-width: thin;
@@ -139,5 +157,9 @@ body {
     
     .critical-alert {
         font-size: 2rem;
+    }
+    
+    .atomic-symbol {
+        font-size: 0.9em;
     }
 }
