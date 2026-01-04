@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRITICAL SYSTEM BREACH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- Landing Page (Fake Link for Invoices) -->
+    <div id="landing" class="z-50 bg-white text-black p-10 rounded-lg shadow-2xl text-center flex flex-col items-center gap-4 border border-gray-300">
+        <div class="bg-blue-100 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+        </div>
+        <h1 class="text-2xl font-bold">צפה בחשבוניות </h1>
+        <div class="text-left w-full bg-gray-50 p-4 border rounded font-sans">
+            <p class="font-semibold text-blue-800">Invoice #5682355</p>
+            <p class="font-semibold text-blue-800">Invoice #5353663</p>
+            <p class="text-sm text-gray-500 mt-2">Click below to view full invoice details and payment history.</p>
+        </div>
+        <button id="start-btn" class="bg-blue-600 text-white px-10 py-3 rounded hover:bg-blue-700 transition font-bold text-lg w-full">
+            View & Download (PDF)
+        </button>
+    </div>
+
+    <!-- Hacking Interface (Hidden initially) -->
+    <div id="hacking-ui" class="hidden fixed inset-0 flex flex-col p-6 overflow-hidden">
+        <div class="scanline"></div>
+        
+        <!-- Header Controls -->
+        <div class="flex justify-between items-center border-b border-green-900 pb-2 mb-4">
+            <div class="flex gap-4 items-center">
+                <span class="text-xs bg-green-900 text-green-200 px-2 py-1 rounded">root@host:~/breach_engine</span>
+                <span id="speed-indicator" class="text-xs font-bold uppercase tracking-widest">STATUS: INJECTING PAYLOAD</span>
+            </div>
+            <button id="close-btn" class="bg-red-600 text-white w-8 h-8 flex items-center justify-center rounded-sm hover:bg-red-500 font-bold border-2 border-red-400">X</button>
+        </div>
+
+        <!-- Terminal Output -->
+        <div id="terminal" class="flex-1 overflow-hidden text-sm md:text-base leading-none terminal-text font-bold">
+            <!-- Dynamic content injected here -->
+        </div>
+
+        <!-- Critical Progress Bars -->
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="border border-green-900 p-2">
+                <div class="flex justify-between text-xs mb-1 text-green-400">
+                    <span>WHATSAPP_LEAK</span>
+                    <span id="wa-progress">0%</span>
+                </div>
+                <div class="h-2 bg-gray-900 overflow-hidden">
+                    <div id="wa-bar" class="h-full bg-green-500 transition-all duration-75" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="border border-green-900 p-2">
+                <div class="flex justify-between text-xs mb-1 text-blue-400">
+                    <span>MAIL_DUMP</span>
+                    <span id="email-progress">0%</span>
+                </div>
+                <div class="h-2 bg-gray-900 overflow-hidden">
+                    <div id="email-bar" class="h-full bg-blue-500 transition-all duration-75" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="border border-green-900 p-2">
+                <div class="flex justify-between text-xs mb-1 text-red-400">
+                    <span>PHONE_SYPHON</span>
+                    <span id="phone-progress">0%</span>
+                </div>
+                <div class="h-2 bg-gray-900 overflow-hidden">
+                    <div id="phone-bar" class="h-full bg-red-500 transition-all duration-75" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Warning Overlay -->
+    <div id="critical-overlay" class="hidden fixed inset-0 bg-red-900/40 flex items-center justify-center pointer-events-none z-[100]">
+        <h1 class="text-6xl md:text-9xl font-black critical-alert text-center leading-none uppercase">System<br>Compromised</h1>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
