@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRITICAL SYSTEM BREACH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier Prime', monospace;
+            overflow: hidden;
+            margin: 0;
+            user-select: none;
+        }
+
+        .terminal-text {
+            text-shadow: 0 0 5px #0f0;
+        }
+
+        .critical-alert {
+            animation: blink 0.3s infinite;
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 255, 0, 0.1) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 4s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100px; }
+        }
+
+        #close-btn {
+            transition: transform 0.05s;
+        }
+        
+        #close-btn:active {
+            transform: scale(0.7);
+        }
+
+        .glitch {
+            animation: glitch 0.2s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- Landing Page (Fake Link for Invoices) -->
+    <div id="landing" class="z-50 bg-white text-black p-10 rounded-lg shadow-2xl text-center flex flex-col items-center gap-4 border border-gray-300">
+        <div class="bg-blue-100 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+        </div>
+        <h1 class="text-2xl font-bold">צפה בחשבוניות </h1>
+        <div class="text-left w-full bg-gray-50 p-4 border rounded font-sans">
+            <p class="font-semibold text-blue-800">Invoice #5682355</p>
+            <p class="font-semibold text-blue-800">Invoice #5353663</p>
+            <p class="text-sm text-gray-500 mt-2">Click below to view full invoice details and payment history.</p>
+        </div>
+        <button onclick="startInfection()" class="bg-blue-600 text-white px-10 py-3 rounded hover:bg-blue-700 transition font-bold text-lg w-full">
+            View & Download (PDF)
+        </button>
+    </div>
+
+    <!-- Hacking Interface (Hidden initially) -->
+    <div id="hacking-ui" class="hidden fixed inset-0 flex flex-col p-6 overflow-hidden">
+        <div class="scanline"></div>
+        
+        <!-- Header Controls -->
+        <div class="flex justify-between items-center border-b border-green-900 pb-2 mb-4">
+            <div class="flex gap-4 items-center">
+                <span class="text-xs bg-green-900 text-green-200 px-2 py-1 rounded">root@host:~/breach_engine</span>
+                <span id="speed-indicator" class="text-xs font-bold uppercase tracking-widest">STATUS: INJECTING PAYLOAD</span>
+            </div>
+            <button id="close-btn" onclick="increaseChaos()" class="bg-red-600 text-white w-8 h-8 flex items-center justify-center rounded-sm hover:bg-red-500 font-bold border-2 border-red-400">X</button>
+        </div>
+
+        <!-- Terminal Output -->
+        <div id="terminal" class="flex-1 overflow-hidden text-sm md:text-base leading-none terminal-text font-bold">
+            <!-- Dynamic content injected here -->
+        </div>
+
+        <!-- Critical Progress Bars -->
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="border border-green-900 p-2">
+                <div class="flex justify-between text-xs mb-1 text-green-400">
+                    <span>WHATSAPP_LEAK</span>
+                    <span id="wa-progress">0%</span>
+                </div>
+                <div class="h-2 bg-gray-900 overflow-hidden">
+                    <div id="wa-bar" class="h-full bg-green-500 transition-all duration-75" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="border border-green-900 p-2">
+                <div class="flex justify-between text-xs mb-1 text-blue-400">
+                    <span>MAIL_DUMP</span>
+                    <span id="email-progress">0%</span>
+                </div>
+                <div class="h-2 bg-gray-900 overflow-hidden">
+                    <div id="email-bar" class="h-full bg-blue-500 transition-all duration-75" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="border border-green-900 p-2">
+                <div class="flex justify-between text-xs mb-1 text-red-400">
+                    <span>PHONE_SYPHON</span>
+                    <span id="phone-progress">0%</span>
+                </div>
+                <div class="h-2 bg-gray-900 overflow-hidden">
+                    <div id="phone-bar" class="h-full bg-red-500 transition-all duration-75" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Warning Overlay -->
+    <div id="critical-overlay" class="hidden fixed inset-0 bg-red-900/40 flex items-center justify-center pointer-events-none z-[100]">
+        <h1 class="text-6xl md:text-9xl font-black critical-alert text-center leading-none uppercase">System<br>Compromised</h1>
+    </div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const hackingUI = document.getElementById('hacking-ui');
+        const landing = document.getElementById('landing');
+        const waBar = document.getElementById('wa-bar');
+        const waProgressText = document.getElementById('wa-progress');
+        const emailBar = document.getElementById('email-bar');
+        const emailProgressText = document.getElementById('email-progress');
+        const phoneBar = document.getElementById('phone-bar');
+        const phoneProgressText = document.getElementById('phone-progress');
+        const speedIndicator = document.getElementById('speed-indicator');
+        const overlay = document.getElementById('critical-overlay');
+
+        let intervalTime = 25; // 4x faster (initial was 100ms)
+        let chaosLevel = 0;
+        let running = false;
+
+        const hebrewNames = ["יוסי לוי", "נועה כהן", "דניאל מזרחי", "עדי פרץ", "איתי אברהם", "שירה דהן", "רון ביטון", "מאיה שפירא"];
+        const hebrewMessages = [
+            "איפה אתה? אני מחכה",
+            "שלחתי לך את הקוד של הבנק",
+            "תזכיר לי מה הסיסמה למייל?",
+            "המסמכים הסודיים מצורפים",
+            "אני בדרך הביתה",
+            "תמונות מהטיול בחו''ל",
+            "אל תספר לאף אחד על זה",
+            "חשבון החשמל שולם"
+        ];
+        
+        function startInfection() {
+            landing.style.display = 'none';
+            hackingUI.classList.remove('hidden');
+            running = true;
+            runLoop();
+            
+            // Fixed Fullscreen API handling to avoid "Disallowed by permissions policy" crash
+            try {
+                if (document.documentElement.requestFullscreen) {
+                    const fsPromise = document.documentElement.requestFullscreen();
+                    if (fsPromise !== undefined) {
+                        fsPromise.catch(error => {
+                            // Silently fail if blocked by policy
+                            console.warn("Fullscreen request denied: " + error.message);
+                        });
+                    }
+                }
+            } catch(e) {
+                console.warn("Fullscreen API not available or blocked");
+            }
+        }
+
+        function generateHackerLine() {
+            const type = Math.floor(Math.random() * 5);
+            const timestamp = new Date().toLocaleTimeString();
+            
+            if (type === 0) {
+                const name = hebrewNames[Math.floor(Math.random() * hebrewNames.length)];
+                const msg = hebrewMessages[Math.floor(Math.random() * hebrewMessages.length)];
+                return `<span class="text-blue-400">[WHATSAPP_DATA]</span> <span class="text-gray-500">${timestamp}</span> | Captured: ${name} -> "${msg}"`;
+            } else if (type === 1) {
+                const email = `user_${Math.floor(Math.random()*1000)}@mail.com`;
+                const subs = ["חשבונית מס", "Bank Alert", "Password Reset", "Secret Docs"];
+                const sub = subs[Math.floor(Math.random() * subs.length)];
+                return `<span class="text-yellow-400">[EMAIL_SYPHON]</span> <span class="text-gray-500">${timestamp}</span> | Subject: ${sub} | From: ${email}`;
+            } else if (type === 2) {
+                const phone = `05${Math.floor(Math.random()*10)}-${Math.floor(Math.random()*10000000)}`;
+                return `<span class="text-red-400">[PHONE_EXTRACT]</span> <span class="text-gray-500">${timestamp}</span> | Extracted Phone Number: ${phone}`;
+            } else if (type === 3) {
+                const codes = ["OVERRIDE_AUTH", "SOCKET_FLOOD", "SHELL_EXEC", "KERNEL_DUMP", "HEX_READ"];
+                const code = codes[Math.floor(Math.random() * codes.length)];
+                return `<span class="text-green-600">[SERVER_CMD]</span> Running ${code} at 0x${Math.random().toString(16).substr(2, 8)}...`;
+            } else {
+                return `<span class="text-white opacity-40">0x${Math.random().toString(16).substr(2, 32)}</span>`;
+            }
+        }
+
+        function runLoop() {
+            if (!running) return;
+
+            // Generate lines based on chaos level
+            for(let i=0; i < (chaosLevel + 1); i++) {
+                const line = document.createElement('div');
+                line.innerHTML = generateHackerLine();
+                terminal.appendChild(line);
+            }
+
+            if (terminal.childNodes.length > 50) {
+                terminal.removeChild(terminal.childNodes[0]);
+            }
+
+            updateBars();
+            setTimeout(runLoop, intervalTime);
+        }
+
+        function updateBars() {
+            const increment = (chaosLevel + 1) * 0.8;
+            
+            let waVal = parseFloat(waBar.style.width) + (Math.random() * increment);
+            let mailVal = parseFloat(emailBar.style.width) + (Math.random() * increment);
+            let phoneVal = parseFloat(phoneBar.style.width) + (Math.random() * increment);
+
+            if (waVal > 100) waVal = 100;
+            if (mailVal > 100) mailVal = 100;
+            if (phoneVal > 100) phoneVal = 100;
+
+            waBar.style.width = waVal + '%';
+            waProgressText.innerText = Math.floor(waVal) + '%';
+            
+            emailBar.style.width = mailVal + '%';
+            emailProgressText.innerText = Math.floor(mailVal) + '%';
+            
+            phoneBar.style.width = phoneVal + '%';
+            phoneProgressText.innerText = Math.floor(phoneVal) + '%';
+        }
+
+        function increaseChaos() {
+            chaosLevel++;
+            intervalTime = Math.max(1, intervalTime - 5);
+            
+            speedIndicator.innerText = "TRANSFER SPEED: " + ("!".repeat(chaosLevel)) + " MAXIMUM " + ("!".repeat(chaosLevel));
+            speedIndicator.style.color = "#ff0000";
+            
+            if (chaosLevel > 1) {
+                overlay.classList.remove('hidden');
+                document.body.classList.add('glitch');
+            }
+
+            spawnFakeAlert();
+        }
+
+        function spawnFakeAlert() {
+            const alert = document.createElement('div');
+            alert.className = 'fixed bg-red-700 text-white p-4 border-2 border-white font-bold z-50 text-center shadow-2xl pointer-events-none uppercase';
+            alert.style.top = Math.random() * 70 + '%';
+            alert.style.left = Math.random() * 70 + '%';
+            alert.innerHTML = `FATAL ERROR!<br>CLOSE ATTEMPT BLOCKED<br>ENCRYPTION IN PROGRESS`;
+            
+            document.body.appendChild(alert);
+            
+            setInterval(() => {
+                alert.style.top = (parseFloat(alert.style.top) + (Math.random() * 6 - 3)) + '%';
+                alert.style.left = (parseFloat(alert.style.left) + (Math.random() * 6 - 3)) + '%';
+            }, 30);
+        }
+
+        // Warning message on exit attempt
+        window.onbeforeunload = function() {
+            return "WARNING: Leaving this page will lead to permanent data corruption.";
+        };
+
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+    </script>
+</body>
+</html>
